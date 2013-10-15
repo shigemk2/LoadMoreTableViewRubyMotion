@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 class ListViewController < UITableViewController
   ONCE_READ_COUNT = 20
+
   def viewDidLoad
     super
 
@@ -47,30 +48,30 @@ class ListViewController < UITableViewController
       end
       if @total > (@page*ONCE_READ_COUNT)
         self.startIndicator
-        self.performSelector(reloadMoreData, withObject:nil, afterDelay:"0.1f")
+        self.performSelector("reloadMoreData", withObject:nil, afterDelay:0.1)
       end
     end
   end
 
   def reloadMoreData
     @page += 1
-    self.tableView = reloadData
+    self.tableView.reloadData
     self.endIndicator
   end
 
   def startIndicator
-    indicator.startAnimating
-    footerFrame = self.tableView.tableFooterView.frame
-    footerFrame.size.height += 10.0
+    @indicator.startAnimating
+    # footerFrame = self.tableView.tableFooterView.frame
+    # footerFrame.size.height += 10.0
 
-    indicator.setFrame(footerFrame)
-    self.tableView.setTableFooterView(indicator)
+    @indicator.frame.size.height += 10.0
+    self.tableView.setTableFooterView(@indicator)
   end
 
   def endIndicator
-    indicator.stopAnimating
-    indicator.removeFromSuperview
-    self.tableView.tableFooterView(nil)
+    @indicator.stopAnimating
+    @indicator.removeFromSuperview
+    # self.tableView.tableFooterView(nil)
   end
 
   def numberOfSectionsInTableView(tableView)

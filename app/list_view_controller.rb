@@ -70,7 +70,7 @@ class ListViewController < UITableViewController
 
   def endIndicator
     @indicator.stopAnimating
-    @indicator.removeFromSuperview
+    # @indicator.removeFromSuperview
     # self.tableView.tableFooterView(nil)
   end
 
